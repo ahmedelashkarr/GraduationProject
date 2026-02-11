@@ -9,7 +9,7 @@ NUM_READINGS = 5       # عدد القراءات اللي هتتجمع قبل م
 SLEEP_BETWEEN = 0.3      # وقت بسيط بين كل قراءة
 RESCAN_EVERY = 3         # اعمل rescan yes كل كام قراءة (لتسريع الموضوع)
 K = 3
-MIN_COMMON_APS = 3
+MIN_COMMON_APS = 2
 # ======================
 
 
