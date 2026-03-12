@@ -1,0 +1,6 @@
+dev/unity/**/Library/
+dev/unity/**/Temp/
+dev/unity/**/Logs/
+dev/unity/**/Build/
+dev/unity/**/UserSettings/
+
