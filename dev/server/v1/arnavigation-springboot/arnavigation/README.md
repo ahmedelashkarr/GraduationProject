@@ -61,8 +61,6 @@ All settings map from `application.properties` and can be overridden with enviro
 | Property | Env var | Default |
 |----------|---------|---------|
 | `server.port` | `FLASK_PORT` | `5000` |
-| `app.x-app-secret` | `X_APP_SECRET` | `ar-nav-secret-2024` |
-| `app.cors.origins` | `CORS_ORIGINS` | `*` |
 | `app.knn.k` | `KNN_K` | `3` |
 | `app.knn.rssi-missing` | `RSSI_MISSING` | `-100` |
 | `app.zone.history-size` | `ZONE_HISTORY_SIZE` | `5` |
