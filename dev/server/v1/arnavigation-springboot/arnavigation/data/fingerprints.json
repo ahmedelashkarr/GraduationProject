@@ -1,0 +1,106 @@
+[
+  {
+    "zone": "F1_LIVING_LEFT",
+    "signals": {
+      "20:3A:EB:AB:A2:13": -74,
+      "30:99:35:A8:BA:20": -69
+    }
+  },
+  {
+    "zone": "F1_LIVING_LEFT",
+    "signals": {
+      "20:3A:EB:AB:A2:13": -72,
+      "30:99:35:A8:BA:20": -68
+    }
+  },
+
+  {
+    "zone": "F1_LIVING_CENTER",
+    "signals": {
+      "30:99:35:A8:BA:20": -58,
+      "20:3A:EB:AB:A2:13": -67
+    }
+  },
+  {
+    "zone": "F1_LIVING_CENTER",
+    "signals": {
+      "30:99:35:A8:BA:20": -60,
+      "20:3A:EB:AB:A2:13": -66
+    }
+  },
+
+  {
+    "zone": "F1_LIVING_RIGHT",
+    "signals": {
+      "30:99:35:A8:BA:20": -62,
+      "20:3A:EB:AB:A2:13": -68
+    }
+  },
+  {
+    "zone": "F1_LIVING_RIGHT",
+    "signals": {
+      "30:99:35:A8:BA:20": -63,
+      "20:3A:EB:AB:A2:13": -70
+    }
+  },
+
+  {
+    "zone": "F1_KITCHEN_CENTER",
+    "signals": {
+      "20:3A:EB:AB:A2:13": -65,
+      "30:99:35:A8:BA:20": -75
+    }
+  },
+  {
+    "zone": "F1_KITCHEN_CENTER",
+    "signals": {
+      "20:3A:EB:AB:A2:13": -66,
+      "30:99:35:A8:BA:20": -74
+    }
+  },
+
+  {
+    "zone": "F1_AHMED_ROOM_CENTER",
+    "signals": {
+      "20:3A:EB:AB:A2:13": -54,
+      "30:99:35:A8:BA:20": -73
+    }
+  },
+  {
+    "zone": "F1_AHMED_ROOM_CENTER",
+    "signals": {
+      "20:3A:EB:AB:A2:13": -55,
+      "30:99:35:A8:BA:20": -72
+    }
+  },
+
+  {
+    "zone": "F1_MS_ROOM",
+    "signals": {
+      "30:99:35:A8:BA:20": -62,
+      "20:3A:EB:AB:A2:13": -78
+    }
+  },
+  {
+    "zone": "F1_MS_ROOM",
+    "signals": {
+      "30:99:35:A8:BA:20": -64,
+      "20:3A:EB:AB:A2:13": -76
+    }
+  },
+
+  {
+    "zone": "F1_DS_ROOM",
+    "signals": {
+      "20:3A:EB:AB:A2:13": -76,
+      "30:99:35:A8:BA:20": -80
+    }
+  },
+  {
+    "zone": "F1_DS_ROOM",
+    "signals": {
+      "20:3A:EB:AB:A2:13": -78,
+      "30:99:35:A8:BA:20": -100
+    }
+  }
+]
