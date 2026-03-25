@@ -1,6 +1,6 @@
 # ARNavigation Server – Spring Boot
 
-A Spring Boot 3 / Maven port of the original Flask ARNavigation backend.
+A Spring Boot 3 / Maven port of the original ARNavigation backend.
 
 ## Project Structure
 
@@ -12,14 +12,12 @@ arnavigation-server/
         ├── java/com/arnav/
         │   ├── ArNavigationApplication.java      # Entry point
         │   ├── config/
-        │   │   ├── AppConfig.java                # @ConfigurationProperties
-        │   │   └── WebConfig.java                # CORS + secret-key filter
+        │   │   └── AppConfig.java                # @ConfigurationProperties
         │   ├── controller/
         │   │   ├── HomeController.java           # GET /  GET /health
         │   │   ├── LocateController.java         # POST /locate
         │   │   ├── RouteController.java          # GET /route
         │   │   ├── RoomsController.java          # GET /rooms
-        │   │   └── FloorplanController.java      # GET /floorplan/{floor}
         │   └── service/
         │       ├── GraphService.java             # Loads building_graph.json
         │       ├── Pathfinder.java               # Dijkstra pathfinding
@@ -46,10 +44,8 @@ Place your data files (same as the Flask version) under `data/` in the working d
 data/
 ├── fingerprints.json
 ├── building_graph.json
-├── rooms.json
-└── floorplans/
-    ├── floor_1.png
-    └── floor_2.png
+└──rooms.json
+
 ```
 
 Override paths via environment variables:
@@ -131,22 +127,4 @@ GET /rooms?q=lab&floor=2&type=classroom
 → { "rooms": [...], "count": 3 }
 ```
 
-### Floorplan
-```
-GET /floorplan/1   → PNG image (floor_1.png)
-```
 
-## Python → Java Mapping
-
-| Python file | Java equivalent |
-|-------------|-----------------|
-| `config.py` | `AppConfig.java` + `application.properties` |
-| `app.py` | `ArNavigationApplication.java` + `WebConfig.java` |
-| `services/graph_service.py` | `service/GraphService.java` |
-| `services/pathfinder.py` | `service/Pathfinder.java` |
-| `services/knn_service.py` | `service/KNNService.java` |
-| `services/localization.py` | `service/ZoneStabilizer.java` + `service/KalmanFilter.java` |
-| `routes/locate.py` | `controller/LocateController.java` |
-| `routes/route.py` | `controller/RouteController.java` |
-| `routes/rooms.py` | `controller/RoomsController.java` |
-| `routes/floorplan.py` | `controller/FloorplanController.java` |
