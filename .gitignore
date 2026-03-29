@@ -1,0 +1,25 @@
+# Unity
+dev/unity/[Ll]ibrary/
+dev/unity/[Tt]emp/
+dev/unity/[Oo]bj/
+dev/unity/[Ll]ogs/
+dev/unity/UserSettings/
+
+# IDEs
+.idea/
+.vscode/
+# Auto-generated files
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+
+# OS files
+.DS_Store
+Thumbs.db

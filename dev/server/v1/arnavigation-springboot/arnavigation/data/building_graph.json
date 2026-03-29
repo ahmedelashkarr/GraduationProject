@@ -1,0 +1,35 @@
+{
+  "nodes": {
+    "F1_LIVING_LEFT": { "floor": 1 },
+    "F1_LIVING_CENTER": { "floor": 1 },
+    "F1_LIVING_RIGHT": { "floor": 1 },
+    "F1_LIVING_DOOR": { "floor": 1 },
+
+    "F1_KITCHEN_CENTER": { "floor": 1 },
+    "F1_KITCHEN_DOOR": { "floor": 1 },
+
+    "F1_AHMED_ROOM_CENTER": { "floor": 1 },
+    "F1_AHMED_ROOM_DOOR": { "floor": 1 },
+
+    "F1_MS_ROOM": { "floor": 1 },
+    "F1_DS_ROOM": { "floor": 1 }
+  },
+
+  "edges": [
+    { "from": "F1_LIVING_LEFT", "to": "F1_LIVING_CENTER", "weight": 5 },
+    { "from": "F1_LIVING_CENTER", "to": "F1_LIVING_RIGHT", "weight": 5 },
+
+    { "from": "F1_LIVING_CENTER", "to": "F1_LIVING_DOOR", "weight": 3 },
+
+    { "from": "F1_LIVING_DOOR", "to": "F1_KITCHEN_DOOR", "weight": 2 },
+    { "from": "F1_LIVING_DOOR", "to": "F1_AHMED_ROOM_DOOR", "weight": 2 },
+
+    { "from": "F1_KITCHEN_DOOR", "to": "F1_KITCHEN_CENTER", "weight": 3 },
+
+    { "from": "F1_AHMED_ROOM_DOOR", "to": "F1_AHMED_ROOM_CENTER", "weight": 3 },
+
+    { "from": "F1_KITCHEN_CENTER", "to": "F1_MS_ROOM", "weight": 4 },
+
+    { "from": "F1_AHMED_ROOM_CENTER", "to": "F1_DS_ROOM", "weight": 4 }
+  ]
+}
