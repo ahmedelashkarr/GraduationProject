@@ -46,4 +46,5 @@ public class RoomsController {
             return ResponseEntity.internalServerError().body(Map.of("error", e.getMessage()));
         }
     }
+
 }

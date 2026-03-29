@@ -1,6 +1,24 @@
-dev/unity/**/Library/
-dev/unity/**/Temp/
-dev/unity/**/Logs/
-dev/unity/**/Build/
-dev/unity/**/UserSettings/
+# Unity generated folders
+dev/unity/[Ll]ibrary/
+dev/unity/[Tt]emp/
+dev/unity/[Oo]bj/
+dev/unity/[Bb]uild/
+dev/unity/[Bb]uilds/
+dev/unity/[Ll]ogs/
+dev/unity/UserSettings/
 
+# Auto-generated files
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+
+# OS files
+.DS_Store
+Thumbs.db
