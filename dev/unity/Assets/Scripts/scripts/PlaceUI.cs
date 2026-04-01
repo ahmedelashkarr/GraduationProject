@@ -41,11 +41,11 @@ public class PlacesUI : MonoBehaviour
 
     public void Populate(Room[] rooms)
     {
-        // 🧹 مسح القديم
-        foreach (Transform child in content)
-        {
-            Destroy(child.gameObject);
-        }
+        // // 🧹 مسح القديم
+        // foreach (Transform child in content)
+        // {
+        //     Destroy(child.gameObject);
+        // }
 
         // ➕ إضافة الجديد
         foreach (Room room in rooms)
