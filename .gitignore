@@ -4,7 +4,8 @@ dev/unity/[Tt]emp/
 dev/unity/[Oo]bj/
 dev/unity/[Ll]ogs/
 dev/unity/UserSettings/
-
+.vs/
+dev/unity/.vs/
 # IDEs
 .idea/
 .vscode/
