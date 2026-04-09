@@ -11,11 +11,9 @@ import org.springframework.context.annotation.Configuration;
 @Setter
 public class AppConfig {
 
-
     private Knn knn = new Knn();
     private Zone zone = new Zone();
     private Data data = new Data();
-
 
     @Getter @Setter
     public static class Knn {
@@ -36,5 +34,8 @@ public class AppConfig {
         private String buildingGraphPath;
         private String roomsPath;
         private String floorplansDir;
+        // BUG FIX: added apMapPath field - it was missing, causing @Value injection
+        // in TrilaterationConfig to have no matching AppConfig field to bind from.
+        private String apMapPath;
     }
 }

@@ -1,106 +1,57 @@
 [
   {
-    "zone": "F1_LIVING_LEFT",
+    "zone": "F1_LOBBY",
     "signals": {
-      "20:3A:EB:AB:A2:13": -74,
-      "30:99:35:A8:BA:20": -69
+      "AA:BB:CC:DD:EE:01": -55,
+      "AA:BB:CC:DD:EE:02": -70,
+      "AA:BB:CC:DD:EE:03": -85
     }
   },
   {
-    "zone": "F1_LIVING_LEFT",
+    "zone": "F1_LOBBY",
     "signals": {
-      "20:3A:EB:AB:A2:13": -72,
-      "30:99:35:A8:BA:20": -68
-    }
-  },
-
-  {
-    "zone": "F1_LIVING_CENTER",
-    "signals": {
-      "30:99:35:A8:BA:20": -58,
-      "20:3A:EB:AB:A2:13": -67
+      "AA:BB:CC:DD:EE:01": -57,
+      "AA:BB:CC:DD:EE:02": -68,
+      "AA:BB:CC:DD:EE:03": -88
     }
   },
   {
-    "zone": "F1_LIVING_CENTER",
+    "zone": "F1_CORRIDOR",
     "signals": {
-      "30:99:35:A8:BA:20": -60,
-      "20:3A:EB:AB:A2:13": -66
-    }
-  },
-
-  {
-    "zone": "F1_LIVING_RIGHT",
-    "signals": {
-      "30:99:35:A8:BA:20": -62,
-      "20:3A:EB:AB:A2:13": -68
+      "AA:BB:CC:DD:EE:01": -75,
+      "AA:BB:CC:DD:EE:02": -55,
+      "AA:BB:CC:DD:EE:03": -65
     }
   },
   {
-    "zone": "F1_LIVING_RIGHT",
+    "zone": "F1_CORRIDOR",
     "signals": {
-      "30:99:35:A8:BA:20": -63,
-      "20:3A:EB:AB:A2:13": -70
-    }
-  },
-
-  {
-    "zone": "F1_KITCHEN_CENTER",
-    "signals": {
-      "20:3A:EB:AB:A2:13": -65,
-      "30:99:35:A8:BA:20": -75
+      "AA:BB:CC:DD:EE:01": -78,
+      "AA:BB:CC:DD:EE:02": -53,
+      "AA:BB:CC:DD:EE:03": -67
     }
   },
   {
-    "zone": "F1_KITCHEN_CENTER",
+    "zone": "F1_R101",
     "signals": {
-      "20:3A:EB:AB:A2:13": -66,
-      "30:99:35:A8:BA:20": -74
-    }
-  },
-
-  {
-    "zone": "F1_AHMED_ROOM_CENTER",
-    "signals": {
-      "20:3A:EB:AB:A2:13": -54,
-      "30:99:35:A8:BA:20": -73
+      "AA:BB:CC:DD:EE:01": -90,
+      "AA:BB:CC:DD:EE:02": -80,
+      "AA:BB:CC:DD:EE:03": -55
     }
   },
   {
-    "zone": "F1_AHMED_ROOM_CENTER",
+    "zone": "F1_R101",
     "signals": {
-      "20:3A:EB:AB:A2:13": -55,
-      "30:99:35:A8:BA:20": -72
-    }
-  },
-
-  {
-    "zone": "F1_MS_ROOM",
-    "signals": {
-      "30:99:35:A8:BA:20": -62,
-      "20:3A:EB:AB:A2:13": -78
+      "AA:BB:CC:DD:EE:01": -88,
+      "AA:BB:CC:DD:EE:02": -82,
+      "AA:BB:CC:DD:EE:03": -53
     }
   },
   {
-    "zone": "F1_MS_ROOM",
+    "zone": "F2_LANDING",
     "signals": {
-      "30:99:35:A8:BA:20": -64,
-      "20:3A:EB:AB:A2:13": -76
-    }
-  },
-
-  {
-    "zone": "F1_DS_ROOM",
-    "signals": {
-      "20:3A:EB:AB:A2:13": -76,
-      "30:99:35:A8:BA:20": -80
-    }
-  },
-  {
-    "zone": "F1_DS_ROOM",
-    "signals": {
-      "20:3A:EB:AB:A2:13": -78,
-      "30:99:35:A8:BA:20": -100
+      "AA:BB:CC:DD:EE:04": -60,
+      "AA:BB:CC:DD:EE:05": -72
     }
   }
 ]

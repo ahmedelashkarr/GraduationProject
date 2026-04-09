@@ -1,35 +1,47 @@
 {
   "nodes": {
-    "F1_LIVING_LEFT": { "floor": 1 },
-    "F1_LIVING_CENTER": { "floor": 1 },
-    "F1_LIVING_RIGHT": { "floor": 1 },
-    "F1_LIVING_DOOR": { "floor": 1 },
-
-    "F1_KITCHEN_CENTER": { "floor": 1 },
-    "F1_KITCHEN_DOOR": { "floor": 1 },
-
-    "F1_AHMED_ROOM_CENTER": { "floor": 1 },
-    "F1_AHMED_ROOM_DOOR": { "floor": 1 },
-
-    "F1_MS_ROOM": { "floor": 1 },
-    "F1_DS_ROOM": { "floor": 1 }
+    "F1_LOBBY": {
+      "label": "Main Lobby",
+      "floor": 1,
+      "x": 5.0,
+      "y": 2.0
+    },
+    "F1_CORRIDOR": {
+      "label": "Floor 1 Corridor",
+      "floor": 1,
+      "x": 10.0,
+      "y": 2.0
+    },
+    "F1_R101": {
+      "label": "Room 101",
+      "floor": 1,
+      "x": 18.0,
+      "y": 2.0
+    },
+    "F1_STAIRS": {
+      "label": "Stairwell",
+      "floor": 1,
+      "x": 10.0,
+      "y": 10.0
+    },
+    "F2_LANDING": {
+      "label": "Floor 2 Landing",
+      "floor": 2,
+      "x": 10.0,
+      "y": 10.0
+    },
+    "F2_R201": {
+      "label": "Room 201",
+      "floor": 2,
+      "x": 18.0,
+      "y": 10.0
+    }
   },
-
   "edges": [
-    { "from": "F1_LIVING_LEFT", "to": "F1_LIVING_CENTER", "weight": 5 },
-    { "from": "F1_LIVING_CENTER", "to": "F1_LIVING_RIGHT", "weight": 5 },
-
-    { "from": "F1_LIVING_CENTER", "to": "F1_LIVING_DOOR", "weight": 3 },
-
-    { "from": "F1_LIVING_DOOR", "to": "F1_KITCHEN_DOOR", "weight": 2 },
-    { "from": "F1_LIVING_DOOR", "to": "F1_AHMED_ROOM_DOOR", "weight": 2 },
-
-    { "from": "F1_KITCHEN_DOOR", "to": "F1_KITCHEN_CENTER", "weight": 3 },
-
-    { "from": "F1_AHMED_ROOM_DOOR", "to": "F1_AHMED_ROOM_CENTER", "weight": 3 },
-
-    { "from": "F1_KITCHEN_CENTER", "to": "F1_MS_ROOM", "weight": 4 },
-
-    { "from": "F1_AHMED_ROOM_CENTER", "to": "F1_DS_ROOM", "weight": 4 }
+    { "from": "F1_LOBBY",    "to": "F1_CORRIDOR", "weight": 5.0,  "direction": "Turn right",    "directed": false },
+    { "from": "F1_CORRIDOR", "to": "F1_R101",     "weight": 8.0,  "direction": "Turn right",    "directed": false },
+    { "from": "F1_CORRIDOR", "to": "F1_STAIRS",   "weight": 8.0,  "direction": "Go straight",   "directed": false },
+    { "from": "F1_STAIRS",   "to": "F2_LANDING",  "weight": 5.0,  "direction": "Take stairs up", "directed": false },
+    { "from": "F2_LANDING",  "to": "F2_R201",     "weight": 8.0,  "direction": "Turn right",    "directed": false }
   ]
 }

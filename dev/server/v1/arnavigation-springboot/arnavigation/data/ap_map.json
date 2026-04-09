@@ -1,0 +1,7 @@
+{
+  "AA:BB:CC:DD:EE:01": { "x": 0.0,  "y": 0.0,  "tx_power": -59 },
+  "AA:BB:CC:DD:EE:02": { "x": 20.0, "y": 0.0,  "tx_power": -59 },
+  "AA:BB:CC:DD:EE:03": { "x": 20.0, "y": 15.0, "tx_power": -59 },
+  "AA:BB:CC:DD:EE:04": { "x": 0.0,  "y": 15.0, "tx_power": -59 },
+  "AA:BB:CC:DD:EE:05": { "x": 10.0, "y": 7.5,  "tx_power": -59 }
+}

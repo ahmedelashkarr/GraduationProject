@@ -1,6 +1,7 @@
 package com.arnav.controller;
 
 import com.arnav.config.AppConfig;
+import com.arnav.service.FusionService;
 import com.arnav.service.KNNService;
 import com.arnav.service.ZoneStabilizer;
 import org.slf4j.Logger;
@@ -23,13 +24,15 @@ public class LocateController {
     private final KNNService knnService;
     private final ZoneStabilizer stabilizer;
     private final AppConfig config;
+    private final FusionService fusionService ;
 
     public LocateController(KNNService knnService,
                             ZoneStabilizer stabilizer,
-                            AppConfig config) {
+                            AppConfig config, FusionService fusionService) {
         this.knnService = knnService;
         this.stabilizer  = stabilizer;
         this.config       = config;
+        this.fusionService = fusionService;
     }
 
     @PostMapping("/locate")
@@ -53,23 +56,26 @@ public class LocateController {
             rawScan.forEach((k, v) -> scan.put(k, ((Number) v).intValue()));
 
             KNNService.PredictionResult pred = knnService.predict(scan);
+            FusionService.LocationResult locationResult = fusionService.locate(scan) ;
 
-            AppConfig.Zone zoneCfg = config.getZone();
-            String stableZone = stabilizer.update(
-                    pred.zone(), pred.confidence(),
-                    zoneCfg.getHistorySize(), zoneCfg.getConfidenceThreshold()
-            );
-
-
-            int floor = 1;
-            if (stableZone.contains("_")) {
-                try {
-                    floor = Integer.parseInt(stableZone.split("_")[0].replace("F", ""));
-                } catch (NumberFormatException ignored) {}
-            }
-
-            double conf = Math.round(pred.confidence() * 1000.0) / 1000.0;
-            return ResponseEntity.ok(Map.of("zone", stableZone, "floor", floor, "confidence", conf));
+//            AppConfig.Zone zoneCfg = config.getZone();
+//            String stableZone = stabilizer.update(
+//                    pred.zone(), pred.confidence(),
+//                    zoneCfg.getHistorySize(), zoneCfg.getConfidenceThreshold()
+//            );
+//
+//
+//            int floor = 1;
+//            if (stableZone.contains("_")) {
+//                try {
+//                    floor = Integer.parseInt(stableZone.split("_")[0].replace("F", ""));
+//                } catch (NumberFormatException ignored) {}
+//            }
+//
+//            double conf = Math.round(pred.confidence() * 1000.0) / 1000.0;
+//            return ResponseEntity.ok(Map.of("zone", stableZone, "floor", floor, "confidence", conf));
+            return ResponseEntity.ok(Map.of("zone", locationResult.zone(), "confidence", locationResult.confidence() ,
+                    "Method" , locationResult.method() ));
 
         } catch (Exception e) {
             log.error("Locate error", e);

@@ -1,32 +1,8 @@
 [
-  {
-    "name": "Ahmed Room",
-    "zone": "F1_AHMED_ROOM_CENTER",
-    "floor": 1,
-    "type": "room"
-  },
-  {
-    "name": "M's Room",
-    "zone": "F1_MS_ROOM",
-    "floor": 1,
-    "type": "room"
-  },
-  {
-    "name": "D's Room",
-    "zone": "F1_DS_ROOM",
-    "floor": 1,
-    "type": "room"
-  },
-  {
-    "name": "Kitchen",
-    "zone": "F1_KITCHEN_CENTER",
-    "floor": 1,
-    "type": "kitchen"
-  },
-  {
-    "name": "Living Room",
-    "zone": "F1_LIVING_CENTER",
-    "floor": 1,
-    "type": "living"
-    }
+  { "name": "Main Lobby",    "floor": 1, "type": "lobby",     "zone": "F1_LOBBY"    },
+    { "name": "Room 101",      "floor": 1, "type": "classroom", "zone": "F1_R101"     },
+  { "name": "Corridor 1",    "floor": 1, "type": "corridor",  "zone": "F1_CORRIDOR" },
+  { "name": "Stairwell",     "floor": 1, "type": "stairwell", "zone": "F1_STAIRS"   },
+  { "name": "Floor 2 Landing","floor": 2, "type": "lobby",    "zone": "F2_LANDING"  },
+  { "name": "Room 201",      "floor": 2, "type": "classroom", "zone": "F2_R201"     }
 ]

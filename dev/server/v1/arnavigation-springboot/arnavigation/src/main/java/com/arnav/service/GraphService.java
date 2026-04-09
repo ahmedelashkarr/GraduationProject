@@ -54,6 +54,14 @@ public class GraphService {
     }
 
     /**
+     * Returns an unmodifiable view of all nodes.
+     * Used by FusionService to find the nearest zone to an (x, y) coordinate.
+     */
+    public Map<String, Map<String, Object>> getAllNodes() {
+        return Collections.unmodifiableMap(nodes);
+    }
+
+    /**
      * Returns list of (neighborZone, weight, directionLabel) triples.
      */
     public List<Neighbor> neighbors(String zoneId) {
