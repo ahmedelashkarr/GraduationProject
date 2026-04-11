@@ -18,8 +18,6 @@ public class WifiScanner
             // Start scan
             wifiManager.Call<bool>("startScan");
 
-            // small delay (important)
-            System.Threading.Thread.Sleep(1000);
 
             AndroidJavaObject results = wifiManager.Call<AndroidJavaObject>("getScanResults");
 

@@ -31,22 +31,24 @@ public class AppNavigation : MonoBehaviour
 
         string url = "https://sweepingly-oxidative-dominga.ngrok-free.dev/route?from=" + from + "&to=" + to;
 
-        Debug.Log("Route URL: " + url);
-        Debug.Log("FROM: " + from);
-        Debug.Log("TO: " + to);
+        Debug.Log("🌐 Route URL: " + url);
+
         UnityWebRequest request = UnityWebRequest.Get(url);
+
+        // 👇 SSL fix لو ngrok
+        request.certificateHandler = new BypassCertificate();
 
         yield return request.SendWebRequest();
 
         if (request.result == UnityWebRequest.Result.Success)
         {
-            Debug.Log("Route Response: " + request.downloadHandler.text);
+            Debug.Log("✅ Route Ready");
 
             SceneManager.LoadScene(2);
         }
         else
         {
-            Debug.LogError("Route Error: " + request.error);
+            Debug.LogError("❌ Route Error: " + request.error);
         }
     }
 
