@@ -1,63 +1,97 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Networking;
 using System.Collections;
 using System.Text;
 using System.Collections.Generic;
+using UnityEngine.Android;
 
 public class ScanSender : MonoBehaviour
 {
-    public TMP_InputField inputField;
     public TMP_Text resultText;
 
-    string url = "http://localhost:5000/locate"; 
+    // 🔥 غير الـ IP ده حسب جهازك
+    string url = "https://sweepingly-oxidative-dominga.ngrok-free.dev/locate";
 
-    public void OnSendClicked()
+    void Start()
     {
-        StartCoroutine(SendScan());
+        StartCoroutine(Init());
+    }
+
+    IEnumerator Init()
+    {
+        // طلب permission
+        if (!Permission.HasUserAuthorizedPermission(Permission.FineLocation))
+        {
+            Permission.RequestUserPermission(Permission.FineLocation);
+            yield return new WaitForSeconds(2f);
+        }
+
+        // يبدأ الإرسال التلقائي
+        StartCoroutine(AutoSendLoop());
+    }
+
+    IEnumerator AutoSendLoop()
+    {
+        while (true)
+        {
+            yield return StartCoroutine(SendScan());
+            yield return new WaitForSeconds(3f);
+        }
     }
 
     IEnumerator SendScan()
-{
-    string json = @"{
-        ""scan"": {
-            ""20:3A:EB:AB:A2:13"": -40,
-            ""30:99:35:A8:BA:20"": -60
+    {
+        Dictionary<string, int> scanData = WifiScanner.GetWifiScan();
+        NavigationData.lastScan = scanData;
+        foreach (var kvp in scanData)
+        {
+            Debug.Log("AP: " + kvp.Key + " RSSI: " + kvp.Value);
+        }   
+
+        // بناء JSON
+        StringBuilder jsonBuilder = new StringBuilder();
+        jsonBuilder.Append("{\"scan\":{");
+
+        foreach (var kvp in scanData)
+        {
+            jsonBuilder.Append("\"" + kvp.Key + "\":" + kvp.Value + ",");
         }
-    }";
 
-    Debug.Log("Sending JSON: " + json);
+        if (scanData.Count > 0)
+            jsonBuilder.Length--;
 
-    UnityWebRequest request = new UnityWebRequest(url, "POST");
-    byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
+        jsonBuilder.Append("}}");
 
-    request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-    request.downloadHandler = new DownloadHandlerBuffer();
+        string json = jsonBuilder.ToString();
 
-    request.SetRequestHeader("Content-Type", "application/json");
+Debug.Log("======= JSON SENT =======");
+Debug.Log(json);
+Debug.Log("=========================");
 
-    yield return request.SendWebRequest();
+        UnityWebRequest request = new UnityWebRequest(url, "POST");
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
 
-    if (request.result == UnityWebRequest.Result.Success)
-    {
-        string responseJson = request.downloadHandler.text;
+        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
 
-        Debug.Log("Response: " + responseJson);
+        yield return request.SendWebRequest();
 
-        ScanResponse response = JsonUtility.FromJson<ScanResponse>(responseJson);
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            string responseJson = request.downloadHandler.text;
+            Debug.Log("Response: " + responseJson);
 
-        resultText.text =
-            "Zone: " + response.zone +
-            "\nFloor: " + response.floor +
-            "\nConfidence: " + response.confidence;
+            if (resultText != null)
+                resultText.text = responseJson;
+        }
+        else
+        {
+            Debug.LogError("Error: " + request.error);
+
+            if (resultText != null)
+                resultText.text = "Error: " + request.error;
+        }
     }
-    else
-    {
-        Debug.LogError("Error: " + request.error);
-        Debug.LogError("Server Response: " + request.downloadHandler.text);
-
-        resultText.text = "Error: " + request.error;
-    }
-}
 }

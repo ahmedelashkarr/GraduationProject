@@ -1,39 +1,12 @@
-﻿//using UnityEngine;
-//using UnityEngine.SceneManagement;
-//using System.Collections;
-
-//public class AppNavigation : MonoBehaviour
-//{
-//    void Start()
-//    {
-//        // لو إحنا في مشهد الـ Splash (رقم 0)، استنى 3 ثواني وانقل
-//        if (SceneManager.GetActiveScene().buildIndex == 0)
-//        {
-//            StartCoroutine(SplashTimer());
-//        }
-//    }
-
-//    IEnumerator SplashTimer()
-//    {
-//        yield return new WaitForSeconds(3f);
-//        SceneManager.LoadScene(1); // افتح المنيو (رقم 1)
-//    }
-
-//    // دالة لزرار الـ Start اللي في المنيو
-//    public void OpenARCamera()
-//    {
-//        SceneManager.LoadScene(2); // افتح الكاميرا (رقم 2)
-//    }
-//}
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.Networking;
 
 public class AppNavigation : MonoBehaviour
 {
     void Start()
     {
-        // لو إحنا في مشهد الـ Splash (رقم 0)، استنى 3 ثواني وانقل
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             StartCoroutine(SplashTimer());
@@ -43,18 +16,42 @@ public class AppNavigation : MonoBehaviour
     IEnumerator SplashTimer()
     {
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene(1); // افتح المنيو (رقم 1)
+        SceneManager.LoadScene(1);
     }
 
-    // دالة لزرار الـ Start اللي في المنيو
     public void OpenARCamera()
     {
-        SceneManager.LoadScene(2); // افتح الكاميرا (رقم 2)
+        StartCoroutine(SendRouteAndOpen());
     }
 
-    // الدالة الجديدة لزرار الرجوع للصفحة الرئيسية
+    IEnumerator SendRouteAndOpen()
+    {
+        string from = NavigationData.startPoint;
+        string to = NavigationData.destination;
+
+        string url = "https://sweepingly-oxidative-dominga.ngrok-free.dev/route?from=" + from + "&to=" + to;
+
+        Debug.Log("Route URL: " + url);
+        Debug.Log("FROM: " + from);
+        Debug.Log("TO: " + to);
+        UnityWebRequest request = UnityWebRequest.Get(url);
+
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            Debug.Log("Route Response: " + request.downloadHandler.text);
+
+            SceneManager.LoadScene(2);
+        }
+        else
+        {
+            Debug.LogError("Route Error: " + request.error);
+        }
+    }
+
     public void BackToMainMenu()
     {
-        SceneManager.LoadScene(1); // هيرجع للمنيو (المشهد رقم 1)
+        SceneManager.LoadScene(1);
     }
 }
