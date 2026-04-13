@@ -3,21 +3,34 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Networking;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlacesUI : MonoBehaviour
 {
     public GameObject buttonPrefab;
     public Transform content;
-    public Button startButton; // 👈 اربطه من Inspector
+    public Button startButton;
+    public TMP_InputField searchInput;
+
+    public AppNavigation appNavigation;
 
     private GameObject selectedCard;
     private Room selectedRoom;
+    private Room[] allRooms;
+
+    private TMP_Text startButtonText;
 
     void Start()
     {
-        Debug.Log("PlacesUI Instance: " + this.GetInstanceID());
+        Debug.Log("PlacesUI Started");
 
-        startButton.interactable = false; // ❌ اقفل زرار البداية لحد ما يختار
+        startButton.interactable = false;
+
+        // 👇 نخزن Text بتاع الزرار
+        startButtonText = startButton.GetComponentInChildren<TMP_Text>();
+
+        // 👇 search
+        searchInput.onValueChanged.AddListener(OnSearchChanged);
 
         StartCoroutine(GetRoomsFromAPI());
     }
@@ -36,7 +49,10 @@ public class PlacesUI : MonoBehaviour
             Debug.Log("API Response: " + json);
 
             RoomResponse response = JsonUtility.FromJson<RoomResponse>(json);
-            Populate(response.rooms);
+
+            allRooms = response.rooms;
+
+            Populate(allRooms);
         }
         else
         {
@@ -46,6 +62,12 @@ public class PlacesUI : MonoBehaviour
 
     public void Populate(Room[] rooms)
     {
+        // 🧹 clear old
+        foreach (Transform child in content)
+        {
+            Destroy(child.gameObject);
+        }
+
         foreach (Room room in rooms)
         {
             GameObject btn = Instantiate(buttonPrefab, content);
@@ -56,16 +78,38 @@ public class PlacesUI : MonoBehaviour
             btn.GetComponent<Button>().onClick.AddListener(() =>
             {
                 Debug.Log("🟢 CLICKED: " + room.name);
-
                 SelectCard(btn, room);
             });
         }
     }
 
+    void OnSearchChanged(string text)
+    {
+        if (allRooms == null) return;
+
+        if (string.IsNullOrEmpty(text))
+        {
+            Populate(allRooms);
+            return;
+        }
+
+        text = text.ToLower();
+
+        List<Room> filtered = new List<Room>();
+
+        foreach (Room room in allRooms)
+        {
+            if (room.name.ToLower().Contains(text) || room.zone.ToLower().Contains(text))
+            {
+                filtered.Add(room);
+            }
+        }
+
+        Populate(filtered.ToArray());
+    }
+
     void SelectCard(GameObject card, Room room)
     {
-        Debug.Log("🟡 ENTER SelectCard");
-
         if (selectedCard != null)
         {
             ResetCard(selectedCard);
@@ -76,7 +120,7 @@ public class PlacesUI : MonoBehaviour
 
         HighlightCard(card);
 
-        startButton.interactable = true; // ✅ فعل زرار Start
+        startButton.interactable = true;
 
         Debug.Log("✅ SelectedRoom: " + selectedRoom.name);
     }
@@ -96,27 +140,28 @@ public class PlacesUI : MonoBehaviour
     }
 
     public void StartNavigation()
+{
+    Debug.Log("🔵 START BUTTON CLICKED");
+
+    if (selectedRoom == null)
     {
-        Debug.Log("🔵 START BUTTON CLICKED");
-
-        if (selectedRoom == null)
-        {
-            Debug.LogError("❌ No room selected!");
-            return;
-        }
-
-        // ✅ نقل البيانات
-        NavigationData.startPoint = "F1_LOBBY";
-        NavigationData.destination = selectedRoom.zone;
-
-        Debug.Log("✅ FROM: " + NavigationData.startPoint);
-        Debug.Log("✅ TO: " + NavigationData.destination);
-
-        // ✅ Call API
-        StartCoroutine(SendRoute());
+        Debug.LogError("❌ No room selected!");
+        return;
     }
 
-    IEnumerator SendRoute()
+    startButton.interactable = false;
+
+    NavigationData.startPoint = "F1_LOBBY";
+    NavigationData.destination = selectedRoom.zone;
+
+    Debug.Log("✅ FROM: " + NavigationData.startPoint);
+    Debug.Log("✅ TO: " + NavigationData.destination);
+
+    // 👇 بس كده
+    appNavigation.OpenARCamera();
+}
+
+    IEnumerator SendRouteAndOpen()
     {
         string url = "https://sweepingly-oxidative-dominga.ngrok-free.dev/route?from="
                      + NavigationData.startPoint + "&to=" + NavigationData.destination;
@@ -124,19 +169,25 @@ public class PlacesUI : MonoBehaviour
         Debug.Log("🌐 URL: " + url);
 
         UnityWebRequest request = UnityWebRequest.Get(url);
-
-        // ⚠️ حل مشكلة SSL
         request.certificateHandler = new BypassCertificate();
 
         yield return request.SendWebRequest();
 
         if (request.result == UnityWebRequest.Result.Success)
         {
-            Debug.Log("✅ Route Response: " + request.downloadHandler.text);
+            Debug.Log("✅ Route Ready");
+
+            appNavigation.OpenARCamera();
         }
         else
         {
             Debug.LogError("❌ Route Error: " + request.error);
+
+            // 🔄 رجع الزرار لو فشل
+            startButton.interactable = true;
+
+            if (startButtonText != null)
+                startButtonText.text = "Start Navigation";
         }
     }
 }

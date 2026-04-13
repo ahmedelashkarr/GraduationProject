@@ -10,8 +10,9 @@ public class ScanSender : MonoBehaviour
 {
     public TMP_Text resultText;
 
-    // 🔥 غير الـ IP ده حسب جهازك
     string url = "https://sweepingly-oxidative-dominga.ngrok-free.dev/locate";
+
+    private bool isSending = false;
 
     void Start()
     {
@@ -20,36 +21,37 @@ public class ScanSender : MonoBehaviour
 
     IEnumerator Init()
     {
-        // طلب permission
         if (!Permission.HasUserAuthorizedPermission(Permission.FineLocation))
         {
             Permission.RequestUserPermission(Permission.FineLocation);
             yield return new WaitForSeconds(2f);
         }
 
-        // يبدأ الإرسال التلقائي
-        StartCoroutine(AutoSendLoop());
+        // 👇 بدل loop القديم
+        InvokeRepeating(nameof(StartScan), 0f, 3f);
     }
 
-    IEnumerator AutoSendLoop()
+    void StartScan()
     {
-        while (true)
-        {
-            yield return StartCoroutine(SendScan());
-            yield return new WaitForSeconds(3f);
-        }
+        // ❌ امنع overlap
+        if (isSending) return;
+
+        StartCoroutine(SendScan());
     }
 
     IEnumerator SendScan()
     {
+        isSending = true;
+
         Dictionary<string, int> scanData = WifiScanner.GetWifiScan();
         NavigationData.lastScan = scanData;
+
         foreach (var kvp in scanData)
         {
             Debug.Log("AP: " + kvp.Key + " RSSI: " + kvp.Value);
-        }   
+        }
 
-        // بناء JSON
+        // JSON
         StringBuilder jsonBuilder = new StringBuilder();
         jsonBuilder.Append("{\"scan\":{");
 
@@ -65,33 +67,36 @@ public class ScanSender : MonoBehaviour
 
         string json = jsonBuilder.ToString();
 
-Debug.Log("======= JSON SENT =======");
-Debug.Log(json);
-Debug.Log("=========================");
+        Debug.Log("======= JSON SENT =======");
+        Debug.Log(json);
 
         UnityWebRequest request = new UnityWebRequest(url, "POST");
+
         byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
 
         request.uploadHandler = new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
 
+        // ⚠️ SSL FIX (لو ngrok)
+        request.certificateHandler = new BypassCertificate();
+
+        // 👇 مهم: مش هنوقف الفريم
         yield return request.SendWebRequest();
 
         if (request.result == UnityWebRequest.Result.Success)
         {
             string responseJson = request.downloadHandler.text;
-            Debug.Log("Response: " + responseJson);
+            Debug.Log("📍 Response: " + responseJson);
 
             if (resultText != null)
                 resultText.text = responseJson;
         }
         else
         {
-            Debug.LogError("Error: " + request.error);
-
-            if (resultText != null)
-                resultText.text = "Error: " + request.error;
+            Debug.LogError("❌ Error: " + request.error);
         }
+
+        isSending = false;
     }
 }
