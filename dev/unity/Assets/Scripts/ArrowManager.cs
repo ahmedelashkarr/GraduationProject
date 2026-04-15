@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
-public class ArrowNavigationSystem : MonoBehaviour
+public class ArrowManager : MonoBehaviour
 {
     [Header("AR")]
     public ARPlaneManager planeManager;
@@ -118,4 +118,18 @@ public class ArrowNavigationSystem : MonoBehaviour
             Time.deltaTime * rotationSpeed
         );
     }
+    /// <summary>
+/// Called by NetworkManager after fetching a path from the server.
+/// Replaces the current waypoints and re-places arrows on the floor.
+/// </summary>
+public void SetWaypoints(Transform[] newWaypoints)
+{
+    waypoints = newWaypoints;
+    currentIndex = 0;
+
+    // Re-place arrows if a floor plane is already known
+    if (floor != null)
+        PlaceArrows();
+    // If no floor yet, arrows will be placed when OnPlanesChanged fires
+}
 }

@@ -46,7 +46,7 @@ public class ScanSender : MonoBehaviour
 
         Dictionary<string, int> scanData = WifiScanner.GetWifiScan();
         NavigationData.lastScan = scanData;
-
+        Debug.Log("SCAN COUNT: " + scanData.Count);
 
         foreach (var kvp in scanData)
         {
