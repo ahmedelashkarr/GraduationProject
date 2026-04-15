@@ -151,7 +151,6 @@ public class PlacesUI : MonoBehaviour
 
     startButton.interactable = false;
 
-    NavigationData.startPoint = "F1_LOBBY";
     NavigationData.destination = selectedRoom.zone;
 
     Debug.Log("✅ FROM: " + NavigationData.startPoint);

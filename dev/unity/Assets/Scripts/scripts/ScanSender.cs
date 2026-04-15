@@ -5,6 +5,7 @@ using System.Collections;
 using System.Text;
 using System.Collections.Generic;
 using UnityEngine.Android;
+using System.Linq;
 
 public class ScanSender : MonoBehaviour
 {
@@ -45,6 +46,7 @@ public class ScanSender : MonoBehaviour
 
         Dictionary<string, int> scanData = WifiScanner.GetWifiScan();
         NavigationData.lastScan = scanData;
+
 
         foreach (var kvp in scanData)
         {
@@ -88,7 +90,10 @@ public class ScanSender : MonoBehaviour
         {
             string responseJson = request.downloadHandler.text;
             Debug.Log("📍 Response: " + responseJson);
+            LocationResponse data = JsonUtility.FromJson<LocationResponse>(responseJson);
 
+            // Save value
+            NavigationData.startPoint = data.zone;
             if (resultText != null)
                 resultText.text = responseJson;
         }
