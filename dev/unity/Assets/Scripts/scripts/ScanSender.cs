@@ -86,11 +86,22 @@ public class ScanSender : MonoBehaviour
 
         if (request.result == UnityWebRequest.Result.Success)
         {
-            string responseJson = request.downloadHandler.text;
-            Debug.Log("📍 Response: " + responseJson);
+        string responseJson = request.downloadHandler.text;
+        Debug.Log("📍 Response: " + responseJson);
+        
+        // ✅ فك JSON
+        ZoneResponse res = JsonUtility.FromJson<ZoneResponse>(responseJson);
+        
+        // ✅ حفظ start point (مرة واحدة بس)
+        if (string.IsNullOrEmpty(NavigationData.startPoint) || NavigationData.startPoint == "F1_LOBBY")
+        {
+            NavigationData.startPoint = res.zone;
+            Debug.Log("🏁 Start Point Saved: " + NavigationData.startPoint);
+        }
 
-            if (resultText != null)
-                resultText.text = responseJson;
+// UI
+if (resultText != null)
+    resultText.text = res.zone;
         }
         else
         {
