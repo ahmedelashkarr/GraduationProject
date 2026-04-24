@@ -19,15 +19,15 @@ public class ARArrowController : MonoBehaviour
 
     [Header("Arrow Prefab")]
     [SerializeField] GameObject arrowPrefab;      // ARArrow prefab
-    [SerializeField] int        arrowCount  = 5;  // Arrows in the trail
-    [SerializeField] float      arrowSpacing = 0.4f; // Metres between arrows
-    [SerializeField] float      arrowScale   = 0.18f;
+    [SerializeField] int        arrowCount  = 6;
+    [SerializeField] float      arrowSpacing = 0.35f;
+    [SerializeField] float      arrowScale   = 0.28f;
 
     [Header("Pulse Animation")]
-    [SerializeField] float pulseSpeed      = 1.4f;
-    [SerializeField] float pulseMinAlpha   = 0.35f;
+    [SerializeField] float pulseSpeed      = 2.0f;
+    [SerializeField] float pulseMinAlpha   = 0.50f;
     [SerializeField] float pulseMaxAlpha   = 1.00f;
-    [SerializeField] Color arrowColor      = new Color(0f, 0.90f, 1f, 1f); // #00E5FF
+    [SerializeField] Color arrowColor      = new Color(0.18f, 0.36f, 0.95f, 1f); // solid blue
 
     [Header("Navigation")]
     [SerializeField] Transform cameraTransform;   // AR camera
