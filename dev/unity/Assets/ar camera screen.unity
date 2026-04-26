@@ -206,7 +206,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1991070994}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &300073206
 GameObject:
@@ -2699,6 +2699,62 @@ MonoBehaviour:
   displayName: Room11 door
   centerOverride: {fileID: 1249934898}
   gizmoColor: {r: 0, g: 0.8, b: 1, a: 0.35}
+--- !u!1 &1273833403
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1273833404}
+  - component: {fileID: 1273833405}
+  m_Layer: 0
+  m_Name: ArrowTrailRenderer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1273833404
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273833403}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1273833405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273833403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e7e44f7666199c48990260968b4c7f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IndoorNav.Navigation.ArrowTrailRenderer
+  navigationController: {fileID: 2134603405}
+  arrowPrefab: {fileID: 2936081519653577627, guid: c85b354202aa6f340b8ba7fbb5669c93, type: 3}
+  arrowParent: {fileID: 1409390359}
+  userCamera: {fileID: 314518467}
+  spacing: 0.5
+  floorOffset: 0.02
+  arrowRotationOffset: {x: 90, y: 0, z: 0}
+  fadeByDistance: 1
+  fadeStartDistance: 2
+  fadeEndDistance: 15
+  hideArrowsBehindUser: 1
+  behindUserDotThreshold: -0.2
 --- !u!1 &1361426130
 GameObject:
   m_ObjectHideFlags: 0
@@ -2969,6 +3025,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1385588145}
   m_CullTransparentMesh: 1
+--- !u!1 &1409390358
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1409390359}
+  m_Layer: 0
+  m_Name: SpawnedArrows
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1409390359
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409390358}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1419151624
 GameObject:
   m_ObjectHideFlags: 0
@@ -3580,7 +3667,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1682102591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3595,7 +3682,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IndoorNav.Navigation.ARDirectionIndicator
   navigationController: {fileID: 2134603405}
   userCamera: {fileID: 314518467}
-  arrowPrefab: {fileID: 8771091787928289351, guid: 7ce851b52be24354cb964dd49d9f7728, type: 3}
+  arrowPrefab: {fileID: 0}
   distanceFromCamera: 1.5
   heightOffset: -1.5
   rotationSpeed: 6
@@ -3932,7 +4019,6 @@ Transform:
   m_Children:
   - {fileID: 1193194219}
   - {fileID: 1852614192}
-  - {fileID: 187735041}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2055729959
@@ -4149,8 +4235,11 @@ SceneRoots:
   - {fileID: 481064650}
   - {fileID: 1991070994}
   - {fileID: 661547414}
+  - {fileID: 187735041}
   - {fileID: 2134603406}
   - {fileID: 1682102592}
   - {fileID: 1006121480}
   - {fileID: 1614392435}
   - {fileID: 300073208}
+  - {fileID: 1273833404}
+  - {fileID: 1409390359}

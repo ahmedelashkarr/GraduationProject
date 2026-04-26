@@ -1,31 +1,34 @@
 using UnityEngine;
 
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+#endif
+
 namespace IndoorNav.Navigation
 {
     /// <summary>
     /// WASD + mouse movement controller for testing navigation in the Editor.
-    /// Only active when running in the Editor (or a desktop build) — does
-    /// nothing on real AR devices, so it won't interfere with AR Foundation
-    /// camera tracking.
+    /// Compatible with both the legacy Input Manager and the new Input System package.
+    /// Only intended for Editor / desktop testing.
     /// </summary>
     public class EditorUserController : MonoBehaviour
     {
-        [Tooltip("Transform to move. Usually the Main Camera under XR Origin.")]
+        [Tooltip("Transform to move. Usually the XR Origin (so the AR camera follows).")]
         [SerializeField] private Transform target;
 
         [Tooltip("Movement speed in meters per second.")]
         [SerializeField] private float moveSpeed = 2.5f;
 
         [Tooltip("Mouse look sensitivity.")]
-        [SerializeField] private float lookSensitivity = 2f;
+        [SerializeField] private float lookSensitivity = 0.15f;
 
         [Tooltip("If true, hold right mouse button to look around. If false, look is always active.")]
         [SerializeField] private bool requireRightMouseToLook = true;
 
-        [Tooltip("Lock camera Y to this height (useful for indoor walking).")]
+        [Tooltip("Lock target Y to a fixed height (useful for indoor walking).")]
         [SerializeField] private bool lockHeight = true;
 
-        [Tooltip("The fixed camera height when lockHeight is on (typical eye level ≈ 1.6m).")]
+        [Tooltip("The fixed height when lockHeight is on (typical eye level ≈ 1.6m).")]
         [SerializeField] private float fixedHeight = 1.6f;
 
         private float _yaw;
@@ -40,7 +43,6 @@ namespace IndoorNav.Navigation
                 return;
             }
 
-            // Initialize yaw/pitch from current rotation
             Vector3 e = target.eulerAngles;
             _yaw   = e.y;
             _pitch = e.x;
@@ -49,18 +51,19 @@ namespace IndoorNav.Navigation
         private void Update()
         {
             if (target == null) return;
-
             HandleLook();
             HandleMovement();
         }
 
         private void HandleLook()
         {
-            bool looking = !requireRightMouseToLook || Input.GetMouseButton(1);
+            bool looking = !requireRightMouseToLook || GetRightMouseHeld();
             if (!looking) return;
 
-            _yaw   += Input.GetAxis("Mouse X") * lookSensitivity;
-            _pitch -= Input.GetAxis("Mouse Y") * lookSensitivity;
+            Vector2 mouseDelta = GetMouseDelta();
+
+            _yaw   += mouseDelta.x * lookSensitivity;
+            _pitch -= mouseDelta.y * lookSensitivity;
             _pitch = Mathf.Clamp(_pitch, -89f, 89f);
 
             target.rotation = Quaternion.Euler(_pitch, _yaw, 0f);
@@ -68,20 +71,13 @@ namespace IndoorNav.Navigation
 
         private void HandleMovement()
         {
-            float h = Input.GetAxis("Horizontal"); // A/D
-            float v = Input.GetAxis("Vertical");   // W/S
-            if (Mathf.Approximately(h, 0f) && Mathf.Approximately(v, 0f)) return;
+            Vector2 move = GetMoveAxis();
+            if (move.sqrMagnitude < 0.0001f) return;
 
-            // Move on the horizontal plane (ignore camera pitch when moving)
-            Vector3 forward = target.forward;
-            forward.y = 0f;
-            forward.Normalize();
+            Vector3 forward = target.forward; forward.y = 0f; forward.Normalize();
+            Vector3 right   = target.right;   right.y   = 0f; right.Normalize();
 
-            Vector3 right = target.right;
-            right.y = 0f;
-            right.Normalize();
-
-            Vector3 delta = (forward * v + right * h) * (moveSpeed * Time.deltaTime);
+            Vector3 delta = (forward * move.y + right * move.x) * (moveSpeed * Time.deltaTime);
             target.position += delta;
 
             if (lockHeight)
@@ -90,6 +86,41 @@ namespace IndoorNav.Navigation
                 p.y = fixedHeight;
                 target.position = p;
             }
+        }
+
+        // ---------- Input abstraction (works with either system) ----------
+
+        private Vector2 GetMoveAxis()
+        {
+#if ENABLE_INPUT_SYSTEM
+            if (Keyboard.current == null) return Vector2.zero;
+            float x = 0f, y = 0f;
+            if (Keyboard.current.aKey.isPressed) x -= 1f;
+            if (Keyboard.current.dKey.isPressed) x += 1f;
+            if (Keyboard.current.sKey.isPressed) y -= 1f;
+            if (Keyboard.current.wKey.isPressed) y += 1f;
+            return new Vector2(x, y);
+#else
+            return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+#endif
+        }
+
+        private Vector2 GetMouseDelta()
+        {
+#if ENABLE_INPUT_SYSTEM
+            return Mouse.current != null ? Mouse.current.delta.ReadValue() : Vector2.zero;
+#else
+            return new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+#endif
+        }
+
+        private bool GetRightMouseHeld()
+        {
+#if ENABLE_INPUT_SYSTEM
+            return Mouse.current != null && Mouse.current.rightButton.isPressed;
+#else
+            return Input.GetMouseButton(1);
+#endif
         }
     }
 }

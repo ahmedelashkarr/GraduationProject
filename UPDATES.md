@@ -4,6 +4,36 @@ Running log of structural changes to the repo. Dates in UTC.
 
 ---
 
+## 2026-04-26 — Arrow-trail navigation visual
+
+### Added
+
+- **`Navigation/ArrowTrailRenderer.cs`** — spawns small arrow prefabs every
+  `spacing` meters along the active route, lying flat on the floor and
+  pointing toward the next zone. Subscribes to
+  `NavigationController.OnRouteStarted` / `OnZoneReached` to rebuild and
+  `OnDestinationReached` to clear. Per-frame distance-fade via
+  `MaterialPropertyBlock` (URP `_BaseColor` with `_Color` fallback — the
+  prefab's source material is never mutated). Optional behind-camera
+  culling via dot-product threshold so the trail doesn't visually wrap
+  around the user. Public `ForceRebuild()` and `ClearArrows()`. Floor
+  height is read from each zone's collider bounds, so multi-floor
+  segments still place arrows on the actual floor of each room.
+- **`Navigation/ArrowTrailDebug.cs`** — editor-time gizmo helper. Takes a
+  list of zone ids, resolves them by scanning the scene (no
+  `ZoneRegistry` needed at edit time), walks the same spacing logic as
+  the renderer, and draws a path line plus a sphere at each predicted
+  spawn point. Lets you preview the trail layout before pressing Play.
+
+### Why
+
+`ARDirectionIndicator` shows a single hovering arrow — fine, but the
+floor-trail style is more intuitive for indoor wayfinding and matches the
+visual language users expect from airport / mall AR apps. The two
+indicators can coexist; disable whichever isn't wanted in the scene.
+
+---
+
 ## 2026-04-26 — `EditorUserController` drives the XR Origin
 
 ### Modified
