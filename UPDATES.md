@@ -4,6 +4,60 @@ Running log of structural changes to the repo. Dates in UTC.
 
 ---
 
+## 2026-04-27 — Reverted: navigation reads `userCamera` again
+
+### Modified
+
+- `NavigationController.cs`, `ARDirectionIndicator.cs`,
+  `ArrowTrailRenderer.cs`, `CurrentZoneTracker.cs`: rolled back the
+  earlier `xrOrigin` rename. Field name is `userCamera` again, with the
+  silent `Camera.main` fallback restored on null. Tooltips reverted to
+  the original wording.
+
+### Why
+
+The XR-Origin-only approach broke device tracking (AR Foundation moves
+the AR Camera within the XR Origin's coordinate space, not the XR
+Origin itself). Reverting keeps the system device-correct without
+requiring the workaround of mirroring the camera pose onto the XR
+Origin or resolving a child camera at runtime.
+
+### Inspector references to re-wire
+
+Renaming back also unlinks any inspector value typed against
+`xrOrigin`. Open each scene and reassign `userCamera` on:
+- `NavigationController`
+- `ARDirectionIndicator`
+- `ArrowTrailRenderer`
+- `CurrentZoneTracker`
+
+Drag the **AR Main Camera** transform (under `XR Origin → Camera Offset`)
+into each slot. Or leave the slot empty and let `Camera.main` fill in
+at Start.
+
+---
+
+## 2026-04-27 — Periodic current-zone heartbeat
+
+### Added
+
+- **`Navigation/CurrentZoneHeartbeat.cs`** — coroutine-driven logger that
+  prints the user's current zone (from `CurrentZoneTracker`) on a fixed
+  interval, default 5 s. Optionally also logs the next route target from
+  `NavigationController.GetCurrentZone()` so each line shows both
+  "inside=X target=Y". Inspector toggle `onlyOnChange` suppresses
+  duplicate lines when the user stands still. `[ContextMenu]` actions
+  for Start / Stop / Log-Now from the inspector.
+
+### Why
+
+`CurrentZoneTracker` only logs on transitions, which goes silent when
+the user is stationary — making it hard to tell whether the system is
+still tracking during long device tests. The heartbeat fills that gap
+without changing the tracker's existing behaviour.
+
+---
+
 ## 2026-04-26 — Arrow-trail navigation visual
 
 ### Added

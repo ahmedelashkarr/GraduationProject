@@ -32,10 +32,10 @@ namespace IndoorNav.Navigation
         [SerializeField] private float floorOffset = 0.02f;
 
         [Tooltip("Extra rotation applied after the look-rotation, e.g. (90,0,0) to lay a +Z-forward arrow flat on the floor.")]
-        [SerializeField] private Vector3 arrowRotationOffset = new Vector3(90f, 0f, 0f);
+        [SerializeField] private Vector3 arrowRotationOffset = new Vector3(90f, 0f, 180f);
 
         [Header("Fade")]
-        [Tooltip("Modulate arrow alpha by distance to the camera.")]
+        [Tooltip("Modulate arrow alpha by distance to the camera.")]    
         [SerializeField] private bool fadeByDistance = true;
 
         [Tooltip("Arrows closer than this distance to the camera are fully opaque.")]

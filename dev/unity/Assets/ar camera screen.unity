@@ -208,52 +208,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &300073206
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 300073208}
-  - component: {fileID: 300073207}
-  m_Layer: 0
-  m_Name: NavigationDebugger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &300073207
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 300073206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5561a9ce97a9c1a4cb350663dab8e584, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::IndoorNav.Navigation.NavigationDebugger
-  navigationController: {fileID: 2134603405}
-  userCamera: {fileID: 314518467}
---- !u!4 &300073208
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 300073206}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.33302, y: -0, z: -9.76233}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &314518466
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,7 +236,7 @@ Transform:
   m_GameObject: {fileID: 314518466}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 6.52, y: 0, z: 3.91}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -338,6 +292,59 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_RaycastPrefab: {fileID: 0}
+--- !u!1 &318848555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 318848557}
+  - component: {fileID: 318848556}
+  m_Layer: 0
+  m_Name: CurrentZoneTracker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &318848556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318848555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56884d28fb6726e4e936850f42c34835, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IndoorNav.Navigation.CurrentZoneTracker
+  userCamera: {fileID: 0}
+  zoneRegistry: {fileID: 187735040}
+  ignoreYAxis: 0
+  logChanges: 1
+  uiLabel: {fileID: 0}
+  idleText: "\u2014"
+  OnCurrentZoneChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!4 &318848557
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318848555}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &364086044
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,7 +375,7 @@ Transform:
   m_GameObject: {fileID: 364086044}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.38, y: 1.6, z: -0.73}
+  m_LocalPosition: {x: -15.57, y: -0.4420186, z: -2.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1012,7 +1019,7 @@ Transform:
   m_GameObject: {fileID: 622930563}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.18, y: 0, z: 13.99}
+  m_LocalPosition: {x: 3.15, y: 0, z: 13.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1053,7 +1060,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.3235846, y: 1.8781394, z: 3.159792}
+  m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 1.1617923, y: 0.4390698, z: 1.079896}
 --- !u!1 &650941600
 GameObject:
@@ -1082,7 +1089,7 @@ Transform:
   m_GameObject: {fileID: 650941600}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.95, y: 0, z: 11.13}
+  m_LocalPosition: {x: 3.08, y: 0, z: 11.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1123,7 +1130,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.8258784, y: 1.2983617, z: 1.5373154}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: -0.79179513, y: 0.14918083, z: -0.6369705}
 --- !u!1 &658782283
 GameObject:
@@ -1247,87 +1254,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 658782283}
   m_CullTransparentMesh: 1
---- !u!1 &661547412
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 661547414}
-  - component: {fileID: 661547413}
-  - component: {fileID: 661547415}
-  m_Layer: 0
-  m_Name: Test
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &661547413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 661547412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d145e5864d30ded45ba2f8931b0d154d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::IndoorNav.Navigation.MockNavigationDriver
-  navigationController: {fileID: 2134603405}
-  simulatedUser: {fileID: 314518467}
-  currentZoneTracker: {fileID: 0}
-  mockPath:
-  - F1_ROOM13
-  - F1_ROOM13_DOOR
-  - F1_CORRIDOR1_DOOR
-  - F1_LOBBY
-  - F1_LOBBY2
-  - F1_LOBBY3
-  - F1_CORRIDOR2_DOOR
-  - F1_ROOM11_DOOR
-  - F1_ROOM11
-  startOnPlay: 1
-  logEvents: 1
---- !u!4 &661547414
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 661547412}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.45651, y: 0, z: 13.34857}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &661547415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 661547412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56884d28fb6726e4e936850f42c34835, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::IndoorNav.Navigation.CurrentZoneTracker
-  userCamera: {fileID: 314518467}
-  zoneRegistry: {fileID: 187735040}
-  ignoreYAxis: 0
-  logChanges: 1
-  uiLabel: {fileID: 0}
-  idleText: "\u2014"
-  OnCurrentZoneChanged:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &720873913
 GameObject:
   m_ObjectHideFlags: 0
@@ -1919,7 +1845,7 @@ Transform:
   m_GameObject: {fileID: 875642609}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.28, y: 0, z: 18.15}
+  m_LocalPosition: {x: 0.84, y: 0, z: 16.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1960,8 +1886,58 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.396577, y: 1.1956294, z: 3.6613407}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: -0.5786968, y: 0.09781468, z: -0.24256611}
+--- !u!1 &926174085
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 926174087}
+  - component: {fileID: 926174086}
+  m_Layer: 0
+  m_Name: EditorUserController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &926174086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 926174085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd0c58548d40bd44785fa007623025a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IndoorNav.Navigation.EditorUserController
+  target: {fileID: 364086045}
+  moveSpeed: 2.5
+  lookSensitivity: 0.15
+  requireRightMouseToLook: 1
+  lockHeight: 1
+  fixedHeight: 1.6
+--- !u!4 &926174087
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 926174085}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.38423, y: 0, z: 9.00784}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &982939736
 GameObject:
   m_ObjectHideFlags: 0
@@ -2308,7 +2284,7 @@ Transform:
   m_GameObject: {fileID: 1034915494}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.49, y: 0, z: 6.72}
+  m_LocalPosition: {x: 3.48, y: 0, z: 5.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2333,8 +2309,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.4566956, y: 2.0114279, z: 7.419949}
-  m_Center: {x: 1.2283478, y: 0.50571376, z: 3.2099745}
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 1.2283478, y: 0.5057137, z: 4.8261747}
 --- !u!114 &1034915497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2579,6 +2555,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5043274181359704421, guid: 0fe200b29eed2e64283eed7d65626087, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 180b1d781a8192b46b5806b9bbb0539a, type: 2}
+    - target: {fileID: -3765533893646470391, guid: 0fe200b29eed2e64283eed7d65626087, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 180b1d781a8192b46b5806b9bbb0539a, type: 2}
     - target: {fileID: -553860988396757955, guid: 0fe200b29eed2e64283eed7d65626087, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2656,7 +2640,7 @@ Transform:
   m_GameObject: {fileID: 1249934897}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.7, y: -0.092, z: 20}
+  m_LocalPosition: {x: -5.24, y: -0.092, z: 19.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2681,7 +2665,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.174887, y: 1.1743633, z: 2.565372}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0.6964414, y: 0.08718169, z: -1.5312293}
 --- !u!114 &1249934900
 MonoBehaviour:
@@ -2746,14 +2730,14 @@ MonoBehaviour:
   navigationController: {fileID: 2134603405}
   arrowPrefab: {fileID: 2936081519653577627, guid: c85b354202aa6f340b8ba7fbb5669c93, type: 3}
   arrowParent: {fileID: 1409390359}
-  userCamera: {fileID: 314518467}
-  spacing: 0.5
+  userCamera: {fileID: 364086045}
+  spacing: 1
   floorOffset: 0.02
   arrowRotationOffset: {x: 90, y: 0, z: 0}
   fadeByDistance: 1
   fadeStartDistance: 2
   fadeEndDistance: 15
-  hideArrowsBehindUser: 1
+  hideArrowsBehindUser: 0
   behindUserDotThreshold: -0.2
 --- !u!1 &1361426130
 GameObject:
@@ -2892,6 +2876,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1361426130}
   m_CullTransparentMesh: 1
+--- !u!1 &1366959924
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1366959926}
+  - component: {fileID: 1366959925}
+  m_Layer: 0
+  m_Name: NavigationDebugger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1366959925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1366959924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5561a9ce97a9c1a4cb350663dab8e584, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IndoorNav.Navigation.NavigationDebugger
+  navigationController: {fileID: 2134603405}
+  userCamera: {fileID: 364086045}
+--- !u!4 &1366959926
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1366959924}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.55538, y: 0, z: 10.29147}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1385588145
 GameObject:
   m_ObjectHideFlags: 0
@@ -3342,7 +3372,7 @@ Transform:
   m_GameObject: {fileID: 1515758272}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.3, y: 0, z: 14.01}
+  m_LocalPosition: {x: -0.72, y: 0, z: 13.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3383,7 +3413,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.1621485, y: 1.8185979, z: 3.1308775}
+  m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 1.5810742, y: 0.4092992, z: 1.0654387}
 --- !u!1 &1524873618
 GameObject:
@@ -3601,108 +3631,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1614392433
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1614392435}
-  - component: {fileID: 1614392434}
-  m_Layer: 0
-  m_Name: EditorUserController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1614392434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1614392433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd0c58548d40bd44785fa007623025a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::IndoorNav.Navigation.EditorUserController
-  target: {fileID: 314518467}
-  moveSpeed: 2.5
-  lookSensitivity: 2
-  requireRightMouseToLook: 1
-  lockHeight: 1
-  fixedHeight: 1.6
---- !u!4 &1614392435
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1614392433}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.46849, y: 0, z: 5.87157}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1682102590
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1682102592}
-  - component: {fileID: 1682102591}
-  m_Layer: 0
-  m_Name: ARDirectionIndicator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1682102591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1682102590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a679804f06dac9a4283e34cca590670d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::IndoorNav.Navigation.ARDirectionIndicator
-  navigationController: {fileID: 2134603405}
-  userCamera: {fileID: 314518467}
-  arrowPrefab: {fileID: 0}
-  distanceFromCamera: 1.5
-  heightOffset: -1.5
-  rotationSpeed: 6
-  modelRotationOffsetEuler: {x: 90, y: 0, z: 0}
-  pointAtNextZone: 1
---- !u!4 &1682102592
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1682102590}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1852614191
 GameObject:
   m_ObjectHideFlags: 0
@@ -3742,6 +3670,65 @@ Transform:
   - {fileID: 2055729960}
   - {fileID: 1029543587}
   m_Father: {fileID: 1991070994}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1853006602
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1853006604}
+  - component: {fileID: 1853006603}
+  m_Layer: 0
+  m_Name: MockNavigationDriver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1853006603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853006602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d145e5864d30ded45ba2f8931b0d154d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IndoorNav.Navigation.MockNavigationDriver
+  navigationController: {fileID: 2134603405}
+  simulatedUser: {fileID: 364086045}
+  currentZoneTracker: {fileID: 0}
+  mockPath:
+  - F1_ROOM13
+  - F1_ROOM13_DOOR
+  - F1_CORRIDOR1_DOOR
+  - F1_LOBBY
+  - F1_LOBBY2
+  - F1_LOBBY3
+  - F1_CORRIDOR2_DOOR
+  - F1_ROOM11_DOOR
+  - F1_ROOM11
+  startOnPlay: 1
+  logEvents: 1
+--- !u!4 &1853006604
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853006602}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.55538, y: 0, z: 10.29147}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1862828011
 GameObject:
@@ -3807,6 +3794,56 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &1869472275
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1869472277}
+  - component: {fileID: 1869472276}
+  m_Layer: 0
+  m_Name: CurrentZoneHeartbeat
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1869472276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869472275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 060fad37b12749b4d9623eb8b81c51e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IndoorNav.Navigation.CurrentZoneHeartbeat
+  currentZoneTracker: {fileID: 318848556}
+  navigationController: {fileID: 2134603405}
+  intervalSeconds: 5
+  startOnEnable: 1
+  onlyOnChange: 0
+  logPrefix: '[CurrentZoneHeartbeat]'
+--- !u!4 &1869472277
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869472275}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1952182567
 GameObject:
   m_ObjectHideFlags: 0
@@ -4048,7 +4085,7 @@ Transform:
   m_GameObject: {fileID: 2055729959}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.69, y: 0, z: 6.21}
+  m_LocalPosition: {x: 2.75, y: 0, z: 3.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4089,7 +4126,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.341156, y: 1.8548273, z: 5.2621336}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: -1.2496591, y: 0.42741376, z: 0.95804834}
 --- !u!1 &2105440689
 GameObject:
@@ -4196,7 +4233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IndoorNav.Navigation.NavigationController
   zoneRegistry: {fileID: 187735040}
-  userCamera: {fileID: 314518467}
+  userCamera: {fileID: 364086045}
   reachThresholdMeters: 1.5
   pathLineRenderer: {fileID: 0}
   pathLineYOffset: 0.05
@@ -4234,12 +4271,13 @@ SceneRoots:
   - {fileID: 170706101}
   - {fileID: 481064650}
   - {fileID: 1991070994}
-  - {fileID: 661547414}
   - {fileID: 187735041}
   - {fileID: 2134603406}
-  - {fileID: 1682102592}
   - {fileID: 1006121480}
-  - {fileID: 1614392435}
-  - {fileID: 300073208}
   - {fileID: 1273833404}
   - {fileID: 1409390359}
+  - {fileID: 1853006604}
+  - {fileID: 1366959926}
+  - {fileID: 926174087}
+  - {fileID: 1869472277}
+  - {fileID: 318848557}

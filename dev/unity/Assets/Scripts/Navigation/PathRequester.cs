@@ -13,7 +13,7 @@ namespace IndoorNav.Navigation
     public class PathRequester : MonoBehaviour
     {
         [Tooltip("Base URL of the server's route endpoint (e.g. https://my-server.example/route).")]
-        [SerializeField] private string serverUrl = "http://localhost:5000/route";
+        [SerializeField] private string serverUrl = "https://sweepingly-oxidative-dominga.ngrok-free.dev/locate";
 
         [Tooltip("NavigationController that will consume the resolved path. Required.")]
         [SerializeField] private NavigationController navigationController;
