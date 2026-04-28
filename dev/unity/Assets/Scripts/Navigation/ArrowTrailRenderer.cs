@@ -149,15 +149,47 @@ namespace IndoorNav.Navigation
         /// <summary>Destroys every spawned arrow and clears internal state.</summary>
         public void ClearArrows()
         {
-            for (int i = 0; i < _arrows.Count; i++)
+            Transform cam = ResolveCamera();
+            if (cam == null) return;
+
+            Vector3 camPos = cam.position;
+            Vector3 camFwd = cam.forward;
+            camFwd.y = 0f;
+            camFwd.Normalize();
+
+            int removed = 0;
+
+            // Iterate backwards so we can safely remove items from the list
+            for (int i = _arrows.Count - 1; i >= 0; i--)
             {
-                if (_arrows[i].go != null)
+                ArrowEntry entry = _arrows[i];
+                if (entry.go == null)
                 {
-                    if (Application.isPlaying) Destroy(_arrows[i].go);
-                    else                       DestroyImmediate(_arrows[i].go);
+                     _arrows.RemoveAt(i);
+                    continue;
                 }
-            }
-            _arrows.Clear();
+
+        Vector3 toArrow = entry.go.transform.position - camPos;
+        toArrow.y = 0f;
+
+        if (toArrow.sqrMagnitude < 0.0001f) continue; // skip arrows on top of user
+
+        toArrow.Normalize();
+        float dot = Vector3.Dot(camFwd, toArrow);
+
+        // If arrow is behind the user (dot product < 0), destroy it
+        if (dot < 0f)
+        {
+            if (Application.isPlaying) Destroy(entry.go);
+            else                       DestroyImmediate(entry.go);
+            _arrows.RemoveAt(i);
+            removed++;
+        }
+    }
+
+        if (removed > 0)
+            Debug.Log($"[ArrowTrailRenderer] Cleared {removed} backward arrows.");
+
         }
 
         // ── Event subscriptions ──────────────────────────────────────────────

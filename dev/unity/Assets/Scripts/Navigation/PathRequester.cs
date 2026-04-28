@@ -13,7 +13,7 @@ namespace IndoorNav.Navigation
     public class PathRequester : MonoBehaviour
     {
         [Tooltip("Base URL of the server's route endpoint (e.g. https://my-server.example/route).")]
-        [SerializeField] private string serverUrl = "https://sweepingly-oxidative-dominga.ngrok-free.dev/locate";
+        [SerializeField] private string serverUrl = "https://sweepingly-oxidative-dominga.ngrok-free.dev/route";
 
         [Tooltip("NavigationController that will consume the resolved path. Required.")]
         [SerializeField] private NavigationController navigationController;
@@ -29,6 +29,7 @@ namespace IndoorNav.Navigation
 
         /// <summary>Raised with the error message when the request or parsing fails.</summary>
         public event Action<string> OnRequestFailed;
+        
 
         /// <summary>
         /// Fetches the path from <paramref name="fromZoneId"/> to <paramref name="toZoneId"/>.

@@ -4,6 +4,105 @@ Running log of structural changes to the repo. Dates in UTC.
 
 ---
 
+## 2026-04-28 — `PathRequester` diagnostics
+
+### Modified
+
+- **`Navigation/PathRequester.cs`** — added a Diagnostics layer:
+  - `[Header("Diagnostics")]` block with new `verboseLogging` (default
+    `true`), `testFromZoneId` (`"F1_ROOM13"`), `testToZoneId`
+    (`"F1_ROOM11"`). `timeoutSeconds` moved into this block and gained
+    `[Min(1)]`; tooltip updated.
+  - New public surface: `enum RequestState { Idle, Sending, Success,
+    ConnectionFailed, HttpError, ParseError }`, `RequestState LastState`
+    (read-only), `string LastError` (read-only). Updated at every stage of
+    the coroutine.
+  - Per-stage verbose logs in `SendRequest`: pre-send (URL / method /
+    body), post-receive (status / result / body), success summary
+    (`step count` + `current_zone`).
+  - Errors split into three discriminated branches with distinct messages:
+    `ConnectionError`, `ProtocolError` / `DataProcessingError` (HTTP
+    4xx / 5xx), and JSON parse failures.
+  - New `[ContextMenu("Send Test Request")]` method `SendTestRequest()`
+    that calls `RequestPath(testFromZoneId, testToZoneId)` only in Play
+    mode.
+- **`Navigation/PathResponse.cs`** — additive: new optional
+  `string current_zone` field (server may send it; surfaced by
+  PathRequester's success log). Existing `path` field unchanged.
+
+### Public API — preserved
+
+- `RequestPath(string, string)` — same signature, same behaviour for
+  existing callers.
+- `OnPathFetched` and `OnRequestFailed` events — still fire on the same
+  conditions as before.
+- `acceptAnyCertificate`, `serverUrl`, `navigationController` fields —
+  unchanged.
+
+### Why
+
+Without logs at each stage it's impossible to tell, on a real device,
+whether a route fetch failed in the network, the HTTP status, or the
+JSON parser. The split-error logging plus `LastState` / `LastError`
+gives both Console diagnostics and a programmatic UI hook.
+
+---
+
+## 2026-04-27 — Trail re-evaluation, behind-cull off by default, rig alignment
+
+### Modified
+
+- **`Navigation/ArrowTrailRenderer.cs`**:
+  - **Update 1 — periodic position re-check.** New `[Header("Position re-check")]`
+    block with `periodicPositionRecheck` (default true), `recheckInterval`
+    (0.5 s), `recheckMoveThreshold` (0.05 m). New private `_lastBuildCenters`
+    snapshot populated inside `RebuildTrail`; `Update()` now calls a new
+    `MaybeRebuildIfZonesMoved()` helper that compares current centers to the
+    snapshot and rebuilds when any drift exceeds the threshold. Centers are
+    re-fetched via `Zone.GetCenter()` on every rebuild — never cached
+    across rebuilds.
+  - **Update 2 — behind-user culling off by default.** Default value of
+    `hideArrowsBehindUser` flipped from `true` to `false`. Existing fields
+    preserved. Per-frame loop already short-circuits the dot check when the
+    flag is off, and re-enables each renderer, so toggling the field at
+    runtime is visible immediately.
+  - `ClearArrows()` now also clears `_lastBuildCenters` to keep state
+    consistent across destroy/restart cycles.
+
+### Added
+
+- **`Navigation/StartZoneAligner.cs`** — new MonoBehaviour with
+  `[DefaultExecutionOrder(-100)]`. Subscribes to
+  `NavigationController.OnRouteStarted` and snaps the XR Origin so the Main
+  Camera lands on the first zone's XZ center (Y preserved). Optional yaw
+  alignment toward the second zone. Optional once-per-session mode. Calls
+  `Physics.SyncTransforms()` after the move so any same-frame readers see
+  the new positions. Public API: `HasAligned` and `LastAlignedZone`.
+
+### Why
+
+- The trail used to drift after AR alignment / map-anchor adjustments
+  because zone positions were captured at build time. Re-fetching every
+  rebuild plus the periodic re-check fixes both inspector edits and
+  runtime moves.
+- Behind-user culling caused arrows to disappear during sharp turns or
+  when looking back — now off by default; users can re-enable per scene.
+- The server returns the user's location as the first zone of the path.
+  Snapping the rig there at route start means the trail and arrow indicator
+  start in the right world position on the very first frame.
+
+### Inspector references to wire (StartZoneAligner)
+
+Create an empty GameObject at scene root named **`StartZoneAligner`**. Add
+the component and assign:
+- `Navigation Controller` → the `NavigationController` GameObject.
+- `Xr Origin` → the **XR Origin** GameObject's transform.
+- `Main Camera` → the AR `Main Camera` transform (under
+  `XR Origin → Camera Offset → Main Camera`). Auto-falls back to
+  `Camera.main` if left empty.
+
+---
+
 ## 2026-04-27 — Reverted: navigation reads `userCamera` again
 
 ### Modified
