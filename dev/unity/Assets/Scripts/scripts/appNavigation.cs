@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 public class AppNavigation : MonoBehaviour
 {
+     
     void Start()
     {
         if (SceneManager.GetActiveScene().buildIndex == 0)
@@ -26,32 +27,28 @@ public class AppNavigation : MonoBehaviour
 
     IEnumerator SendRouteAndOpen()
     {
-        string from = NavigationData.startPoint;
-        string to = NavigationData.destination;
-
-        string url = "https://sweepingly-oxidative-dominga.ngrok-free.dev/route?from=" + from + "&to=" + to;
-
-        Debug.Log("🌐 Route URL: " + url);
-
-        UnityWebRequest request = UnityWebRequest.Get(url);
-
-        // 👇 SSL fix لو ngrok
-        request.certificateHandler = new BypassCertificate();
-
-        yield return request.SendWebRequest();
-
-        if (request.result == UnityWebRequest.Result.Success)
-        {
-            Debug.Log("✅ Route Ready");
-
-            SceneManager.LoadScene(2);
+           string from = NavigationData.startPoint;
+            string to = NavigationData.destination;
+    
+            // Validate inputs before transitioning to AR scene
+            if (string.IsNullOrEmpty(from))
+            {
+                Debug.LogError("[SendRouteAndOpen] startPoint is empty — localization hasn't completed yet.");
+                yield break;
         }
-        else
+        if (string.IsNullOrEmpty(to))
         {
-            Debug.LogError("❌ Route Error: " + request.error);
+            Debug.LogError("[SendRouteAndOpen] destination is empty — please pick a destination.");
+            yield break;
         }
-    }
-
+    
+        // Note: the actual /route request is made by PathRequester in the
+        // AR scene (autoFetchOnStart). We don't fetch here — we just store
+        // the values in NavigationData (already done) and switch scenes.
+        Debug.Log($"[SendRouteAndOpen] Loading AR scene. from={from}, to={to}");
+        SceneManager.LoadScene(2);
+        yield break;
+    }   
     public void BackToMainMenu()
     {
         SceneManager.LoadScene(1);

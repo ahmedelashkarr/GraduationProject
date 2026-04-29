@@ -119,6 +119,107 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &153692170
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 153692172}
+  - component: {fileID: 153692171}
+  m_Layer: 0
+  m_Name: AROcclusionSetup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &153692171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153692170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd3c5caea1b0646479d7924f77700f7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IndoorNav.Navigation.AROcclusionSetup
+  occlusionManager: {fileID: 364086051}
+  depthMode: 3
+  useTemporalSmoothing: 1
+  logStatusOnStart: 1
+  statusCheckDelay: 1
+--- !u!4 &153692172
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153692170}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.17068, y: -16.25585, z: 9.57488}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &170028497
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 170028499}
+  - component: {fileID: 170028498}
+  m_Layer: 0
+  m_Name: ARDirectionIndicator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &170028498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170028497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a679804f06dac9a4283e34cca590670d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IndoorNav.Navigation.ARDirectionIndicator
+  navigationController: {fileID: 2134603405}
+  userCamera: {fileID: 364086045}
+  arrowPrefab: {fileID: 2936081519653577627, guid: c85b354202aa6f340b8ba7fbb5669c93, type: 3}
+  distanceFromCamera: 1.5
+  heightOffset: -0.25
+  rotationSpeed: 6
+  modelRotationOffsetEuler: {x: 90, y: 0, z: 0}
+  pointAtNextZone: 0
+--- !u!4 &170028499
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170028497}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.118, y: 0, z: 12.93627}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &170706099
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,7 +422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56884d28fb6726e4e936850f42c34835, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IndoorNav.Navigation.CurrentZoneTracker
-  userCamera: {fileID: 0}
+  userCamera: {fileID: 364086045}
   zoneRegistry: {fileID: 187735040}
   ignoreYAxis: 0
   logChanges: 1
@@ -359,6 +460,7 @@ GameObject:
   - component: {fileID: 364086048}
   - component: {fileID: 364086047}
   - component: {fileID: 364086046}
+  - component: {fileID: 364086051}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -574,6 +676,23 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &364086051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364086044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b15f82cc229284894964d2d30806969d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.XR.ARFoundation::UnityEngine.XR.ARFoundation.AROcclusionManager
+  m_HumanSegmentationStencilMode: 0
+  m_HumanSegmentationDepthMode: 0
+  m_EnvironmentDepthMode: 3
+  m_EnvironmentDepthTemporalSmoothing: 1
+  m_OcclusionPreferenceMode: 0
 --- !u!1 &481064647
 GameObject:
   m_ObjectHideFlags: 0
@@ -1645,6 +1764,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e869edaa4e5dc1649b247539bd955881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IndoorNav.Navigation.StartZoneAligner
+  navigationController: {fileID: 2134603405}
+  xrOrigin: {fileID: 314518467}
+  mainCamera: {fileID: 364086045}
+  alignOncePerSession: 0
+  alignRotation: 0
+  verboseLogging: 1
 --- !u!4 &818873332
 Transform:
   m_ObjectHideFlags: 0
@@ -1948,7 +2073,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &926174086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2115,10 +2240,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aac4ef03a31b79141b235e01e207d20a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IndoorNav.Navigation.PathRequester
-  serverUrl: https://sweepingly-oxidative-dominga.ngrok-free.dev/locate
+  serverUrl: https://sweepingly-oxidative-dominga.ngrok-free.dev/route
   navigationController: {fileID: 2134603405}
   timeoutSeconds: 10
-  acceptAnyCertificate: 0
+  acceptAnyCertificate: 1
+  autoFetchOnStart: 1
+  autoFetchDelay: 0.5
 --- !u!4 &1006121480
 Transform:
   m_ObjectHideFlags: 0
@@ -2279,7 +2406,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2761,15 +2888,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IndoorNav.Navigation.ArrowTrailRenderer
   navigationController: {fileID: 2134603405}
   arrowPrefab: {fileID: 2936081519653577627, guid: c85b354202aa6f340b8ba7fbb5669c93, type: 3}
-  arrowParent: {fileID: 1409390359}
-  userCamera: {fileID: 364086045}
-  spacing: 1
+  arrowParent: {fileID: 0}
+  userCamera: {fileID: 0}
+  spacing: 0.5
   floorOffset: 0.02
   arrowRotationOffset: {x: 90, y: 0, z: 0}
   fadeByDistance: 1
   fadeStartDistance: 2
   fadeEndDistance: 15
-  hideArrowsBehindUser: 0
+  hideArrowsBehindUser: 1
   behindUserDotThreshold: -0.2
 --- !u!1 &1361426130
 GameObject:
@@ -3719,7 +3846,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1853006603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3842,7 +3969,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1869472276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4259,7 +4386,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2134603404}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aed87bd3811dae74b9f268da4505d3e6, type: 3}
   m_Name: 
@@ -4302,15 +4429,17 @@ SceneRoots:
   - {fileID: 1973891351}
   - {fileID: 170706101}
   - {fileID: 481064650}
-  - {fileID: 1991070994}
   - {fileID: 187735041}
   - {fileID: 2134603406}
-  - {fileID: 1006121480}
+  - {fileID: 170028499}
   - {fileID: 1273833404}
+  - {fileID: 1006121480}
   - {fileID: 1409390359}
-  - {fileID: 1853006604}
   - {fileID: 818873332}
+  - {fileID: 1991070994}
+  - {fileID: 1853006604}
   - {fileID: 1366959926}
   - {fileID: 926174087}
   - {fileID: 1869472277}
   - {fileID: 318848557}
+  - {fileID: 153692172}

@@ -24,13 +24,37 @@ namespace IndoorNav.Navigation
         [Tooltip("Accept self-signed / invalid TLS certificates (useful with ngrok tunnels). Do not enable in production.")]
         [SerializeField] private bool acceptAnyCertificate = false;
 
+        [Header("Auto-fetch on Start")]
+        [Tooltip("If on, automatically reads NavigationData.startPoint and NavigationData.destination on Start and fires the request.")]
+        [SerializeField] private bool autoFetchOnStart = true;
+
+        [Tooltip("Seconds to wait before auto-fetching, to give the scene time to fully initialize.")]
+        [SerializeField, Min(0f)] private float autoFetchDelay = 0.5f;
         /// <summary>Raised after a successful fetch and parse, before the controller is notified.</summary>
         public event Action<PathResponse> OnPathFetched;
 
         /// <summary>Raised with the error message when the request or parsing fails.</summary>
         public event Action<string> OnRequestFailed;
-        
+        private IEnumerator Start()
+        {
+            if (!autoFetchOnStart) yield break;
 
+            if (autoFetchDelay > 0f)
+                yield return new WaitForSeconds(autoFetchDelay);
+
+                string from = NavigationData.startPoint;
+                string to   = NavigationData.destination;
+
+                Debug.Log($"[PathRequester] Auto-fetch on Start. from='{from}', to='{to}'");
+
+                if (string.IsNullOrEmpty(from) || string.IsNullOrEmpty(to))
+                {
+                    Debug.LogWarning("[PathRequester] startPoint or destination is empty in NavigationData. Skipping auto-fetch.");
+                    yield break;
+                }
+
+                RequestPath(from, to);
+        }
         /// <summary>
         /// Fetches the path from <paramref name="fromZoneId"/> to <paramref name="toZoneId"/>.
         /// Zone ids are URL-encoded before being appended to the request.

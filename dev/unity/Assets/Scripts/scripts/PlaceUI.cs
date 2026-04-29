@@ -160,33 +160,30 @@ public class PlacesUI : MonoBehaviour
     appNavigation.OpenARCamera();
 }
 
+    // Previously this method fetched the route here in the menu scene and
+    // discarded the response, then the AR scene fetched the same route a
+    // second time via PathRequester. We now skip the menu-scene fetch and
+    // let PathRequester (in the AR scene) own the single source of truth
+    // for talking to /route.
     IEnumerator SendRouteAndOpen()
     {
-        string url = "https://sweepingly-oxidative-dominga.ngrok-free.dev/route?from="
-                     + NavigationData.startPoint + "&to=" + NavigationData.destination;
+        string from = NavigationData.startPoint;
+        string to   = NavigationData.destination;
 
-        Debug.Log("🌐 URL: " + url);
-
-        UnityWebRequest request = UnityWebRequest.Get(url);
-        request.certificateHandler = new BypassCertificate();
-
-        yield return request.SendWebRequest();
-
-        if (request.result == UnityWebRequest.Result.Success)
+        if (string.IsNullOrWhiteSpace(from) || string.IsNullOrWhiteSpace(to))
         {
-            Debug.Log("✅ Route Ready");
+            Debug.LogError(
+                "[PlacesUI] Cannot open AR scene — NavigationData.startPoint or " +
+                $".destination is empty. startPoint='{from}', destination='{to}'.");
 
-            appNavigation.OpenARCamera();
+            // Restore the button so the user can retry.
+            if (startButton != null) startButton.interactable = true;
+            if (startButtonText != null) startButtonText.text = "Start Navigation";
+
+            yield break;
         }
-        else
-        {
-            Debug.LogError("❌ Route Error: " + request.error);
 
-            // 🔄 رجع الزرار لو فشل
-            startButton.interactable = true;
-
-            if (startButtonText != null)
-                startButtonText.text = "Start Navigation";
-        }
+        appNavigation.OpenARCamera();
+        yield break;
     }
 }

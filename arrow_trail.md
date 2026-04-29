@@ -105,7 +105,7 @@ Scene
 │       └── Main Camera           ← AR camera transform
 ├── ZoneRegistry                  ← already wired
 ├── NavigationController          ← already wired
-├── ARDirectionIndicator          ← DISABLE in inspector (or remove)
+├── ARDirectionIndicator           ← DISABLE in inspector (or remove)
 ├── ArrowTrailRenderer            ← NEW empty GO + ArrowTrailRenderer
 │       Navigation Controller   = NavigationController GO
 │       Arrow Prefab            = your floor-arrow prefab

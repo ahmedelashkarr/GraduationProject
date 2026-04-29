@@ -4,6 +4,92 @@ Running log of structural changes to the repo. Dates in UTC.
 
 ---
 
+## 2026-04-29 — ARCore depth-API occlusion for arrow trail
+
+### Added
+
+- **`Navigation/AROcclusionSetup.cs`** — runtime configurator for AR
+  Foundation's environment-depth occlusion. Reads / writes
+  `AROcclusionManager.requestedEnvironmentDepthMode` and
+  `environmentDepthTemporalSmoothingRequested`. Coroutine waits 1 s for
+  ARCore to negotiate, then logs whether depth is `ACTIVE` or
+  `NOT AVAILABLE` and updates `IsDepthAvailable` / `StatusMessage`.
+  `[ContextMenu("Check Depth Support")]` dumps subsystem-descriptor
+  capabilities for diagnostics.
+- **`Shaders/AROccludedArrow.shader`** — Built-in CG shader (PATH B per
+  spec). Samples `_EnvironmentDepth` via the AR-bound
+  `_EnvironmentDepthDisplayMatrix`, compares the fragment's eye-space
+  depth to the environment depth, and `discard`s fragments that are
+  behind real geometry. Keeps the existing transparent / cyan look via
+  `_Color` and `_MainTex`. Fallback path uses `Transparent/Diffuse` so
+  arrows still render when the CG pass can't compile.
+
+### Why
+
+`ArrowTrailRenderer` placed cyan chevrons through walls — fine in an
+empty test scene but breaks immersion in a real building where you can
+see arrows in rooms you haven't entered. ARCore's environment depth
+gives a cheap depth image per frame, and discarding fragments behind it
+makes the trail respect actual walls.
+
+### Render-pipeline mismatch — flagged
+
+`Packages/manifest.json` includes
+`com.unity.render-pipelines.universal 17.4.0`, so URP is likely the
+active pipeline despite the prompt's instruction to use PATH B
+(Built-in). Built-in CG shaders compile and render under URP, but the
+AR Foundation occlusion bindings are wired most reliably for the active
+pipeline. If arrows render unoccluded with this shader, switch to a
+URP Shader Graph using the AR Foundation occlusion subgraph (PATH A
+from the prompt). The `.shader` file's header comment notes this.
+
+### Package versions
+
+`com.unity.xr.arfoundation` and `com.unity.xr.arcore` are both at
+**6.4.2** (the prompt expected 5.x). The public API used here
+(`AROcclusionManager`, `EnvironmentDepthMode`,
+`environmentDepthTemporalSmoothingRequested`) is identical between 5.x
+and 6.x, so the script compiles either way.
+
+---
+
+## 2026-04-28 — Single source of truth for `/route` (PathRequester)
+
+### Modified
+
+- **`Scripts/scripts/appNavigation.cs`** — `SendRouteAndOpen` no longer
+  hits `/route`. Validates `NavigationData.startPoint` /
+  `.destination` are non-empty, logs a clear error if either is empty,
+  otherwise loads scene 2. Coroutine signature preserved (still
+  `IEnumerator`). Removed the half-finished `PathRequester requester;`
+  stub.
+- **`Scripts/scripts/PlaceUI.cs`** — `SendRouteAndOpen` (the dead-code
+  variant inside `PlacesUI`) updated to the same validate-and-load
+  pattern. Failure path restores the `Start Navigation` button so the
+  user can retry.
+- **`Scripts/Navigation/PathRequester.cs`** — added `bypassSslCertificate`
+  toggle (default `true`, uses global `BypassCertificate`) plus
+  `[Header("Auto-fetch on Start")]` block with `autoFetchOnStart`
+  (default `true`). New private `Start()` that reads
+  `NavigationData.startPoint` / `.destination` and calls the existing
+  public `RequestPath(string, string)` once. Cert-handler branch now
+  prefers `BypassCertificate` when `bypassSslCertificate` is on, else
+  falls back to the existing `AcceptAllCertificatesHandler` for
+  `acceptAnyCertificate`. Existing public API untouched.
+
+### Why
+
+Two paths to `/route` were running. The old menu-scene coroutine
+fetched the route, threw away the response, and used the success status
+only as a green light to load the AR scene — which then re-fetched the
+same route via `PathRequester`. Two requests for one piece of data,
+plus a brittle UX (the menu blocked on the network even though the
+result was discarded). The new flow stages the ids in
+`NavigationData`, switches scene immediately, and lets the AR-scene
+`PathRequester` make the single real request on its `Start()`.
+
+---
+
 ## 2026-04-28 — `PathRequester` diagnostics
 
 ### Modified
