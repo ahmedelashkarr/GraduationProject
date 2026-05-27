@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120" width="100%" height="100%">
+                        <!-- الظل -->
+                        <ellipse cx="50" cy="110" rx="20" ry="5" fill="rgba(0,0,0,0.1)"/>
+                        <!-- الدبوس -->
+                        <path d="M50 5 C25 5 5 25 5 50 C5 75 50 115 50 115 C50 115 95 75 95 50 C95 25 75 5 50 5 Z" fill="#ffffff" filter="drop-shadow(0px 4px 8px rgba(0,0,0,0.2))"/>
+                        <!-- الدائرة الزرقاء الداخلية -->
+                        <circle cx="50" cy="45" r="30" fill="#004AAD"/>
+                        <!-- نص AR -->
+                        <text x="50" y="55" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#ffffff" text-anchor="middle">AR</text>
+                      </svg>

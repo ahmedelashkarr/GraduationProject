@@ -1,0 +1,57 @@
+[
+  {
+    "zone": "F1_LOBBY",
+    "signals": {
+      "AA:BB:CC:DD:EE:01": -55,
+      "AA:BB:CC:DD:EE:02": -70,
+      "AA:BB:CC:DD:EE:03": -85
+    }
+  },
+  {
+    "zone": "F1_LOBBY",
+    "signals": {
+      "AA:BB:CC:DD:EE:01": -57,
+      "AA:BB:CC:DD:EE:02": -68,
+      "AA:BB:CC:DD:EE:03": -88
+    }
+  },
+  {
+    "zone": "F1_CORRIDOR",
+    "signals": {
+      "AA:BB:CC:DD:EE:01": -75,
+      "AA:BB:CC:DD:EE:02": -55,
+      "AA:BB:CC:DD:EE:03": -65
+    }
+  },
+  {
+    "zone": "F1_CORRIDOR",
+    "signals": {
+      "AA:BB:CC:DD:EE:01": -78,
+      "AA:BB:CC:DD:EE:02": -53,
+      "AA:BB:CC:DD:EE:03": -67
+    }
+  },
+  {
+    "zone": "F1_R101",
+    "signals": {
+      "AA:BB:CC:DD:EE:01": -90,
+      "AA:BB:CC:DD:EE:02": -80,
+      "AA:BB:CC:DD:EE:03": -55
+    }
+  },
+  {
+    "zone": "F1_R101",
+    "signals": {
+      "AA:BB:CC:DD:EE:01": -88,
+      "AA:BB:CC:DD:EE:02": -82,
+      "AA:BB:CC:DD:EE:03": -53
+    }
+  },
+  {
+    "zone": "F2_LANDING",
+    "signals": {
+      "AA:BB:CC:DD:EE:04": -60,
+      "AA:BB:CC:DD:EE:05": -72
+    }
+  }
+]
