@@ -9,5 +9,5 @@ public static class NavigationData
     public static string destination = "";
 
     // 🏁 Start Point
-    public static string startPoint = "F1_LOBBY"; // تقدر تغيره
+    public static string startPoint = ""; // تقدر تغيره
 }
