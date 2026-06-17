@@ -1,0 +1,13 @@
+# Ignore only generated folders
+[Ll]ibrary/
+[Tt]emp/
+[Ll]ogs/
+UserSettings/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+
+# IDE
+.vs/
+*.csproj
+*.sln

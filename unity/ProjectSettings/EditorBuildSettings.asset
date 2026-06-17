@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/splash screen.unity
+    guid: b446f5a23f10e0445b6deca070f1169f
+  - enabled: 1
+    path: Assets/main screen.unity
+    guid: d903122dc17bceb439a4973a292fe1d0
+  - enabled: 1
+    path: Assets/ar camera screen.unity
+    guid: ecd912510282a264e84fbac44be3da28
+  m_configObjects:
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: ee5fe46ba864dab4886765159c8d2627, type: 2}
+    UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: 97975670c97cbca46b00af34571a4fc3, type: 2}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: daf052b7a0123e14c8c4acbfac4df1a5, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: f885648b324aebc48866da8ae25e8964, type: 2}
